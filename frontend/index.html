@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4caf50">
+    <meta name="description" content="بيت المحاشي - أشهى وجبات المحاشي الشرقية">
+    
+    <title>بيت المحاشي - طلب طعام أونلاين</title>
+    
+    <!-- الأيقونة -->
+    <link rel="icon" href="/assets/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/icons/app-icon.png">
+    
+    <!-- ملف التثبيت -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- أنماط CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/themes.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    
+    <!-- الخطوط -->
+    <link rel="preload" href="/assets/fonts/cairo-regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/assets/fonts/cairo-bold.ttf" as="font" type="font/ttf" crossorigin>
+</head>
+<body>
+    <!-- شاشة البداية -->
+    <div class="splash-screen" id="splashScreen">
+        <img src="/assets/images/logo/logo-full.png" alt="بيت المحاشي">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- الحاوية الرئيسية للتطبيق -->
+    <div id="app"></div>
+    
+    <!-- شريط التنقل السفلي للجوال -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="/" data-nav class="nav-item">
+            <i class="icon-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="/menu" data-nav class="nav-item">
+            <i class="icon-menu"></i>
+            <span>القائمة</span>
+        </a>
+        <a href="/cart" data-nav class="nav-item">
+            <i class="icon-cart"></i>
+            <span>السلة</span>
+            <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+        <a href="/profile" data-nav class="nav-item">
+            <i class="icon-user"></i>
+            <span>حسابي</span>
+        </a>
+    </nav>
+    
+    <!-- شاشة تحميل التطبيق -->
+    <div class="offline-alert" id="offlineAlert">
+        <div class="offline-content">
+            <i class="icon-wifi-off"></i>
+            <h3>أنت غير متصل بالإنترنت</h3>
+            <p>تحقق من اتصالك وحاول مجددًا</p>
+            <button id="retryConnection" class="btn btn-primary">إعادة المحاولة</button>
+        </div>
+    </div>
+    
+    <!-- توجيه لتحميل service worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registered: ', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
+    
+    <!-- JavaScript الرئيسي -->
+    <script type="module" src="/js/app.js"></script>
+</body>
+</html>

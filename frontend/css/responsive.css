@@ -1,0 +1,297 @@
+/* === تخطيط استجابي === */
+
+/* شاشات صغيرة جدًا (الهواتف) */
+@media (max-width: 576px) {
+    :root {
+      --font-size-xs: 0.7rem;
+      --font-size-sm: 0.8rem;
+      --font-size-md: 0.9rem;
+      --font-size-lg: 1.1rem;
+      --font-size-xl: 1.3rem;
+      --font-size-xxl: 1.6rem;
+      --spacing-md: 0.8rem;
+    }
+  
+    .container {
+      padding: 0 var(--spacing-sm);
+    }
+  
+    .header {
+      padding: 0 var(--spacing-sm);
+    }
+  
+    .header .logo img {
+      height: 30px;
+    }
+  
+    .header .nav {
+      display: none;
+    }
+  
+    .col {
+      flex: 0 0 100%;
+      margin-bottom: var(--spacing-md);
+    }
+  
+    .desktop-only {
+      display: none !important;
+    }
+  
+    /* عرض شريط التنقل السفلي على الجوال */
+    .mobile-nav {
+      display: flex;
+    }
+  
+    #app {
+      padding-bottom: var(--bottom-nav-height);
+    }
+  
+    .hero-section {
+      text-align: center;
+    }
+  
+    .hero-section .btn {
+      display: block;
+      width: 100%;
+    }
+  
+    .category-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .menu-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .cart-item {
+      flex-direction: column;
+    }
+  
+    .cart-item-image {
+      margin-bottom: var(--spacing-sm);
+      margin-left: 0;
+    }
+  
+    .cart-summary {
+      margin-top: var(--spacing-md);
+    }
+  
+    .auth-container {
+      padding: var(--spacing-md);
+    }
+  }
+  
+  /* شاشات صغيرة (الهواتف اللوحية الصغيرة) */
+  @media (min-width: 576px) and (max-width: 767px) {
+    .container {
+      padding: 0 var(--spacing-md);
+    }
+  
+    .header .nav {
+      display: none;
+    }
+  
+    .col {
+      flex: 0 0 50%;
+    }
+  
+    .desktop-only {
+      display: none !important;
+    }
+  
+    /* عرض شريط التنقل السفلي على الجوال */
+    .mobile-nav {
+      display: flex;
+    }
+  
+    #app {
+      padding-bottom: var(--bottom-nav-height);
+    }
+  
+    .category-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    .menu-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* شاشات متوسطة (الأجهزة اللوحية) */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .container {
+      padding: 0 var(--spacing-md);
+    }
+  
+    .col {
+      flex: 0 0 33.333%;
+    }
+  
+    .desktop-only {
+      display: block;
+    }
+  
+    .mobile-only {
+      display: none !important;
+    }
+  
+    /* إخفاء شريط التنقل السفلي على الأجهزة المكتبية */
+    .mobile-nav {
+      display: none;
+    }
+  
+    #app {
+      padding-bottom: 0;
+    }
+  
+    .category-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  
+    .menu-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* شاشات كبيرة (أجهزة الكمبيوتر المحمولة والكمبيوتر المكتبية) */
+  @media (min-width: 992px) {
+    .container {
+      padding: 0 var(--spacing-lg);
+    }
+  
+    .col {
+      flex: 0 0 25%;
+    }
+  
+    .desktop-only {
+      display: block;
+    }
+  
+    .mobile-only {
+      display: none !important;
+    }
+  
+    /* إخفاء شريط التنقل السفلي على الأجهزة المكتبية */
+    .mobile-nav {
+      display: none;
+    }
+  
+    #app {
+      padding-bottom: 0;
+    }
+  
+    .category-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  
+    .menu-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    .order-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    .checkout-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: var(--spacing-lg);
+    }
+  }
+  
+  /* تنسيقات العناصر الاستجابية */
+  
+  /* صور مرنة */
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* عناوين مرنة */
+  @media (max-width: 576px) {
+    h1 {
+      font-size: 1.8rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+    }
+  }
+  
+  /* أزرار مرنة */
+  @media (max-width: 576px) {
+    .btn {
+      padding: 0.5rem 1rem;
+    }
+  }
+  
+  /* فئات استجابية */
+  .hidden-xs {
+    display: none;
+  }
+  
+  @media (min-width: 576px) {
+    .hidden-xs {
+      display: initial;
+    }
+    .visible-xs {
+      display: none;
+    }
+  }
+  
+  /* جدول استجابي */
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  @media (max-width: 768px) {
+    .table-responsive table th,
+    .table-responsive table td {
+      padding: 0.5rem;
+    }
+  }
+  
+  /* شبكة مرنة */
+  .grid {
+    display: grid;
+    gap: var(--spacing-md);
+  }
+  
+  .grid-1 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  @media (max-width: 576px) {
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (min-width: 576px) and (max-width: 768px) {
+    .grid-3,
+    .grid-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 992px) {
+    .grid-4 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }

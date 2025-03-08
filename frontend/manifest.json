@@ -1,0 +1,50 @@
+{
+    "name": "بيت المحاشي",
+    "short_name": "بيت المحاشي",
+    "description": "طلب وجبات المحاشي الشرقية الشهية أونلاين",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#ffffff",
+    "theme_color": "#4caf50",
+    "icons": [
+      {
+        "src": "/assets/icons/app-icon.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/assets/icons/app-icon.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ],
+    "related_applications": [
+      {
+        "platform": "web"
+      }
+    ],
+    "categories": ["food", "shopping", "lifestyle"],
+    "shortcuts": [
+      {
+        "name": "قائمة الطعام",
+        "url": "/menu",
+        "icons": [{ "src": "/assets/icons/category-icons/menu.png", "sizes": "96x96" }]
+      },
+      {
+        "name": "سلة المشتريات",
+        "url": "/cart",
+        "icons": [{ "src": "/assets/icons/category-icons/cart.png", "sizes": "96x96" }]
+      },
+      {
+        "name": "طلباتي السابقة",
+        "url": "/profile/orders",
+        "icons": [{ "src": "/assets/icons/category-icons/orders.png", "sizes": "96x96" }]
+      }
+    ],
+    "dir": "rtl",
+    "lang": "ar",
+    "prefer_related_applications": false
+  }
