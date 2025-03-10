@@ -1,24 +1,43 @@
 {
     "name": "bayt-almahashy",
     "version": "1.0.0",
-    "description": "تطبيق تلغرام مصغر لمطعم بيت المحاشي",
+    "description": "تطبيق لطلب الطعام أونلاين من مطعم بيت المحاشي مع تكامل تلغرام",
     "main": "backend/server.js",
     "scripts": {
       "start": "node backend/server.js",
       "dev": "nodemon backend/server.js",
-      "frontend": "live-server frontend"
+      "frontend": "live-server frontend",
+      "build": "mkdir -p dist && cp -r frontend dist && cp -r backend dist && cp -r config dist && cp -r database dist",
+      "db:seed": "node database/seeds/seed.js"
     },
     "dependencies": {
-      "express": "^4.17.1",
-      "mongoose": "^6.0.12",
-      "telegraf": "^4.4.2",
-      "dotenv": "^10.0.0",
+      "axios": "^0.24.0",
+      "bcryptjs": "^2.4.3",
       "cors": "^2.8.5",
+      "crypto": "^1.0.1",
+      "dotenv": "^10.0.0",
+      "express": "^4.17.1",
+      "express-validator": "^6.13.0",
+      "fs": "^0.0.1-security",
       "jsonwebtoken": "^8.5.1",
-      "bcryptjs": "^2.4.3"
+      "mongoose": "^6.0.12",
+      "morgan": "^1.10.0",
+      "multer": "^1.4.3",
+      "nodemailer": "^6.7.0",
+      "path": "^0.12.7",
+      "telegraf": "^4.4.2"
     },
     "devDependencies": {
-      "nodemon": "^2.0.14"
-    }
+      "nodemon": "^2.0.14",
+      "live-server": "^1.2.1"
+    },
+    "engines": {
+      "node": ">=14.0.0"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/yourusername/bayt-almahashy.git"
+    },
+    "author": "Your Name",
+    "license": "MIT"
   }
-  

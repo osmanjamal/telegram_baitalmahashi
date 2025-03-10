@@ -3,6 +3,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
 const dotenv = require('dotenv');
+const fs = require('fs');
+const https = require('https');
 
 // تحميل متغيرات البيئة
 dotenv.config({ path: path.resolve(__dirname, '../config/.env') });
@@ -30,7 +32,10 @@ const app = express();
 connectDB();
 
 // الوسطاء العامة
-app.use(cors());
+app.use(cors({
+  origin: ['https://t.me', 'https://web.telegram.org', process.env.FRONTEND_URL || 'http://localhost:3000'],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -44,6 +49,19 @@ app.use(loggerMiddleware);
 
 // خدمة الملفات الثابتة للواجهة الأمامية
 app.use(express.static(path.join(__dirname, '../frontend')));
+
+// إضافة رأس Telegram WebApp لدعم تكامل تلغرام
+app.use((req, res, next) => {
+  res.header('Cross-Origin-Embedder-Policy', 'require-corp');
+  res.header('Cross-Origin-Opener-Policy', 'same-origin');
+  res.header('Cross-Origin-Resource-Policy', 'cross-origin');
+  next();
+});
+
+// ضبط المسارات الخاصة بـ Telegram WebApp
+app.get('/tgwebapp', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend', 'index.html'));
+});
 
 // تسجيل بوت تلغرام
 require('./telegram-bot');
@@ -67,12 +85,35 @@ app.use(errorMiddleware);
 
 // بدء تشغيل الخادم
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 الخادم يعمل على المنفذ ${PORT} في بيئة ${process.env.NODE_ENV}`);
-  console.log(`📊 واجهة المستخدم: http://localhost:${PORT}`);
-  console.log(`🍽️ واجهة المطبخ: http://localhost:${PORT}/kitchen`);
-  console.log(`👨‍💼 لوحة الإدارة: http://localhost:${PORT}/admin`);
-});
+
+// التحقق إذا كان يجب تشغيل خادم HTTPS (لبيئة الإنتاج)
+if (process.env.NODE_ENV === 'production' && process.env.SSL_KEY && process.env.SSL_CERT) {
+  // قراءة شهادات SSL
+  const privateKey = fs.readFileSync(process.env.SSL_KEY, 'utf8');
+  const certificate = fs.readFileSync(process.env.SSL_CERT, 'utf8');
+  
+  const credentials = { key: privateKey, cert: certificate };
+  
+  // إنشاء خادم HTTPS
+  const httpsServer = https.createServer(credentials, app);
+  
+  httpsServer.listen(PORT, () => {
+    console.log(`🔒 الخادم يعمل بـ HTTPS على المنفذ ${PORT} في بيئة ${process.env.NODE_ENV}`);
+    console.log(`📊 واجهة المستخدم: https://${process.env.DOMAIN || 'localhost'}:${PORT}`);
+    console.log(`🍽️ واجهة المطبخ: https://${process.env.DOMAIN || 'localhost'}:${PORT}/kitchen`);
+    console.log(`👨‍💼 لوحة الإدارة: https://${process.env.DOMAIN || 'localhost'}:${PORT}/admin`);
+    console.log(`🤖 رابط تطبيق تلغرام: https://${process.env.DOMAIN || 'localhost'}:${PORT}/tgwebapp`);
+  });
+} else {
+  // إنشاء خادم HTTP (للتطوير المحلي)
+  app.listen(PORT, () => {
+    console.log(`🚀 الخادم يعمل على المنفذ ${PORT} في بيئة ${process.env.NODE_ENV || 'development'}`);
+    console.log(`📊 واجهة المستخدم: http://localhost:${PORT}`);
+    console.log(`🍽️ واجهة المطبخ: http://localhost:${PORT}/kitchen`);
+    console.log(`👨‍💼 لوحة الإدارة: http://localhost:${PORT}/admin`);
+    console.log(`🤖 رابط تطبيق تلغرام: http://localhost:${PORT}/tgwebapp`);
+  });
+}
 
 // معالجة الاستثناءات غير المعالجة
 process.on('uncaughtException', (err) => {

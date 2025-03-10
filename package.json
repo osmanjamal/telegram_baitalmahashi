@@ -1,0 +1,46 @@
+{
+    "name": "bayt-almahashy",
+    "version": "1.0.0",
+    "description": "تطبيق لطلب الطعام أونلاين من مطعم بيت المحاشي مع تكامل تلغرام",
+    "main": "backend/server.js",
+    "scripts": {
+        "start": "node backend/server.js",
+        "dev": "nodemon backend/server.js",
+        "frontend": "live-server frontend",
+        "build": "rimraf dist && mkdir dist && xcopy /E /I frontend dist\\frontend && xcopy /E /I backend dist\\backend && xcopy /E /I config dist\\config && xcopy /E /I database dist\\database",
+        "db:seed": "node database/seeds/seed.js"
+    },
+    "dependencies": {
+        "axios": "^0.24.0",
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "crypto": "^1.0.1",
+        "dotenv": "^10.0.0",
+        "express": "^4.21.2",
+        "express-validator": "^6.13.0",
+        "fs": "^0.0.1-security",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.13.8",
+        "morgan": "^1.10.0",
+        "multer": "^1.4.4",
+        "nodemailer": "^6.10.0",
+        "path": "^0.12.7",
+        "stripe": "^17.7.0",
+        "telegraf": "^4.16.3"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "live-server": "^1.2.1",
+        "nodemon": "^2.0.14",
+        "rimraf": "^6.0.1"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yourusername/bayt-almahashy.git"
+    },
+    "author": "Your Name",
+    "license": "MIT"
+}
